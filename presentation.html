@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRODOO.AI 발표 자료</title>
+  <style>
+    :root {
+      --bg: #f7f5f2;
+      --surface: #ffffff;
+      --ink: #1f1f1f;
+      --muted: #5b5b5b;
+      --accent: #d97757;
+      --accent-soft: #f2d8cf;
+      --border: #e8e1db;
+      --dark: #10141b;
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      background: #d8d2ca;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif;
+    }
+
+    body {
+      line-height: 1.45;
+    }
+
+    @page {
+      size: 16in 9in;
+      margin: 0;
+    }
+
+    .deck {
+      width: 16in;
+      margin: 0 auto;
+    }
+
+    .slide {
+      position: relative;
+      width: 16in;
+      height: 9in;
+      page-break-after: always;
+      overflow: hidden;
+      background: var(--bg);
+      padding: 0.72in 0.82in;
+    }
+
+    .slide.dark {
+      background: var(--dark);
+      color: #f3f3f3;
+    }
+
+    .slide.dark .muted,
+    .slide.dark .kicker,
+    .slide.dark .footer {
+      color: #c9c2bb;
+    }
+
+    .slide.dark .card,
+    .slide.dark .mini-card {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+
+    .slide:last-child {
+      page-break-after: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 64px;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    h2 {
+      max-width: 980px;
+      font-size: 46px;
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+    }
+
+    h3 {
+      font-size: 23px;
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+    }
+
+    .kicker {
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      max-width: 850px;
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 24px;
+      letter-spacing: -0.015em;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .accent {
+      color: var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .grid.two {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+
+    .grid.three {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid.four {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .card,
+    .mini-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .card {
+      padding: 30px;
+    }
+
+    .mini-card {
+      padding: 22px;
+    }
+
+    .card p,
+    .mini-card p {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .dark .card p,
+    .dark .mini-card p {
+      color: #c9c2bb;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 46px;
+      align-items: center;
+      height: 100%;
+    }
+
+    .hero-image {
+      width: 100%;
+      border-radius: 34px;
+      border: 1px solid rgba(31, 31, 31, 0.08);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 0 16px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .section-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 36px;
+      margin-bottom: 46px;
+    }
+
+    .section-top .lead {
+      max-width: 460px;
+      margin-top: 0;
+      font-size: 21px;
+    }
+
+    .number {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 42px;
+    }
+
+    .flow-item {
+      position: relative;
+      padding: 28px;
+      min-height: 205px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .flow-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -18px;
+      width: 18px;
+      border-top: 3px solid var(--accent);
+    }
+
+    .flow-item p {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .diagram {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 42px;
+    }
+
+    .diagram .node {
+      display: flex;
+      min-height: 230px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .node .label {
+      color: var(--accent);
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+    }
+
+    .node ul {
+      margin: 24px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 42px;
+    }
+
+    .feature {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .icon-box {
+      display: grid;
+      place-items: center;
+      width: 74px;
+      height: 74px;
+      border-radius: 22px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .feature p {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .mock-browser {
+      margin-top: 38px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: #fff;
+    }
+
+    .browser-bar {
+      display: flex;
+      gap: 8px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      background: #faf8f5;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+    }
+
+    .mock-content {
+      display: grid;
+      grid-template-columns: 1fr 0.75fr;
+      gap: 28px;
+      padding: 34px;
+    }
+
+    .mock-title {
+      height: 34px;
+      width: 72%;
+      border-radius: 999px;
+      background: var(--dark);
+    }
+
+    .mock-line {
+      height: 15px;
+      margin-top: 15px;
+      border-radius: 999px;
+      background: #e6dfd8;
+    }
+
+    .mock-cta {
+      width: 170px;
+      height: 42px;
+      margin-top: 26px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .mock-card {
+      min-height: 190px;
+      border-radius: 22px;
+      background: var(--accent-soft);
+    }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-top: 44px;
+    }
+
+    .roadmap .step {
+      min-height: 195px;
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .roadmap .step p {
+      margin-top: 12px;
+      color: #c9c2bb;
+      font-size: 16px;
+    }
+
+    .quote {
+      margin-top: 46px;
+      padding-left: 32px;
+      border-left: 6px solid var(--accent);
+      font-size: 34px;
+      line-height: 1.28;
+      letter-spacing: -0.025em;
+    }
+
+    .footer {
+      position: absolute;
+      left: 0.82in;
+      right: 0.82in;
+      bottom: 0.42in;
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .big-stat {
+      font-size: 58px;
+      line-height: 1;
+      color: var(--accent);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="slide">
+      <div class="hero-layout">
+        <div>
+          <p class="kicker">AI Agent-Powered App Build Agency</p>
+          <h1>AI 에이전트와 함께, 더 빠르게 앱을 만듭니다.</h1>
+          <p class="lead">PRODOO.AI는 입문자도 이해할 수 있는 방식으로 기획부터 배포까지 함께하는 현대적 앱 개발 에이전시입니다.</p>
+          <div class="badge-row">
+            <span class="badge">기획</span>
+            <span class="badge">구현</span>
+            <span class="badge">테스트</span>
+            <span class="badge">문서화</span>
+            <span class="badge">배포</span>
+          </div>
+        </div>
+        <img class="hero-image" src="/Users/soni/.cursor/projects/Users-soni-Desktop-vibecoding-SH-260429-1/assets/prodoo-ai-hero.png" alt="AI 에이전트와 사람이 앱 화면을 함께 구성하는 이미지">
+      </div>
+      <div class="footer"><span>PRODOO.AI</span><span>01</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="section-top">
+        <div>
+          <p class="kicker">Problem</p>
+          <h2>입문자와 작은 팀에게 앱 개발은 여전히 복잡합니다.</h2>
+        </div>
+        <p class="lead">아이디어는 있지만 요구사항 정리, 구현 순서, 테스트, 배포까지 한 번에 다루기 어렵습니다.</p>
+      </div>
+      <div class="grid three">
+        <article class="card">
+          <span class="number">1</span>
+          <h3>요구사항이 흐릿함</h3>
+          <p>기획 언어가 개발 실행 언어로 바뀌는 과정에서 맥락이 자주 누락됩니다.</p>
+        </article>
+        <article class="card">
+          <span class="number">2</span>
+          <h3>반복 작업이 많음</h3>
+          <p>화면 구성, 상태 처리, 문서화, 테스트 같은 반복 구현에 시간이 많이 소요됩니다.</p>
+        </article>
+        <article class="card">
+          <span class="number">3</span>
+          <h3>피드백 주기가 김</h3>
+          <p>초기 방향 검증이 늦어질수록 비용과 일정의 불확실성이 커집니다.</p>
+        </article>
+      </div>
+      <p class="quote">“빠르게 만들어 보고 싶지만, 어디서부터 시작해야 할지 모르는 팀을 위한 실행 파트너가 필요합니다.”</p>
+      <div class="footer"><span>PRODOO.AI</span><span>02</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="section-top">
+        <div>
+          <p class="kicker">Solution</p>
+          <h2>핵심 판단은 사람이, 반복 구현은 에이전트가 맡습니다.</h2>
+        </div>
+        <p class="lead">PRODOO.AI는 AI 에이전트 기반 작업 체계로 더 짧은 주기에 제품을 완성합니다.</p>
+      </div>
+      <div class="diagram">
+        <article class="node">
+          <div>
+            <p class="label">HUMAN</p>
+            <h3>목표와 우선순위 결정</h3>
+          </div>
+          <ul>
+            <li>비즈니스 목표</li>
+            <li>사용자 문제</li>
+            <li>최종 의사결정</li>
+          </ul>
+        </article>
+        <article class="node">
+          <div>
+            <p class="label">AI AGENTS</p>
+            <h3>반복 구현과 검증 자동화</h3>
+          </div>
+          <ul>
+            <li>코드 초안 작성</li>
+            <li>문서 정리</li>
+            <li>테스트 보조</li>
+          </ul>
+        </article>
+        <article class="node">
+          <div>
+            <p class="label">PRODUCT</p>
+            <h3>동작하는 결과물로 빠른 검증</h3>
+          </div>
+          <ul>
+            <li>MVP</li>
+            <li>관리도구</li>
+            <li>업무 자동화</li>
+          </ul>
+        </article>
+      </div>
+      <div class="footer"><span>PRODOO.AI</span><span>03</span></div>
+    </section>
+
+    <section class="slide">
+      <p class="kicker">Process</p>
+      <h2>아이디어를 배포 가능한 결과물로 바꾸는 4단계 흐름</h2>
+      <div class="flow">
+        <article class="flow-item">
+          <span class="number">1</span>
+          <h3>문제 정의</h3>
+          <p>비즈니스 목표와 사용자 문제를 실행 가능한 요구사항으로 전환합니다.</p>
+        </article>
+        <article class="flow-item">
+          <span class="number">2</span>
+          <h3>에이전트 설계/분업</h3>
+          <p>작업 단위를 나누고 에이전트 역할을 정의해 병렬 생산성을 높입니다.</p>
+        </article>
+        <article class="flow-item">
+          <span class="number">3</span>
+          <h3>구현/검증</h3>
+          <p>기능 구현과 테스트를 빠르게 반복하며 피드백을 반영합니다.</p>
+        </article>
+        <article class="flow-item">
+          <span class="number">4</span>
+          <h3>배포/개선</h3>
+          <p>출시 이후 반응과 지표를 다음 개선 사이클로 연결합니다.</p>
+        </article>
+      </div>
+      <div class="footer"><span>PRODOO.AI</span><span>04</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="section-top">
+        <div>
+          <p class="kicker">Current Product</p>
+          <h2>현재 구현된 랜딩 페이지는 상담 전환에 집중합니다.</h2>
+        </div>
+        <p class="lead">방문자가 가치 제안, 작업 방식, 사례, FAQ를 확인한 뒤 문의 폼으로 자연스럽게 이동합니다.</p>
+      </div>
+      <div class="mock-browser" aria-label="랜딩 페이지 화면 예시">
+        <div class="browser-bar">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <div class="mock-content">
+          <div>
+            <div class="mock-title"></div>
+            <div class="mock-line" style="width: 86%;"></div>
+            <div class="mock-line" style="width: 78%;"></div>
+            <div class="mock-line" style="width: 62%;"></div>
+            <div class="mock-cta"></div>
+          </div>
+          <div class="mock-card"></div>
+        </div>
+      </div>
+      <div class="footer"><span>PRODOO.AI</span><span>05</span></div>
+    </section>
+
+    <section class="slide">
+      <p class="kicker">Features</p>
+      <h2>작지만 완성도 있는 정적 웹사이트 기능 구성</h2>
+      <div class="feature-list">
+        <article class="feature">
+          <div class="icon-box">KO</div>
+          <div>
+            <h3>3개 언어 지원</h3>
+            <p>한국어, 영어, 일본어 텍스트와 메타 정보를 한 번에 전환합니다.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <div class="icon-box">DM</div>
+          <div>
+            <h3>라이트/다크 테마</h3>
+            <p>OS 설정과 사용자 선택값을 반영하고 localStorage에 저장합니다.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <div class="icon-box">FAQ</div>
+          <div>
+            <h3>FAQ 아코디언</h3>
+            <p>입문자 질문을 접고 펼칠 수 있어 정보 탐색 부담을 줄입니다.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <div class="icon-box">@</div>
+          <div>
+            <h3>메일 문의 폼</h3>
+            <p>백엔드 없이 mailto 링크로 고객 문의를 빠르게 연결합니다.</p>
+          </div>
+        </article>
+      </div>
+      <div class="footer"><span>PRODOO.AI</span><span>06</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="section-top">
+        <div>
+          <p class="kicker">Tech Stack</p>
+          <h2>외부 라이브러리 없이 HTML/CSS/JavaScript로 가볍게 구현했습니다.</h2>
+        </div>
+        <p class="lead">정적 호스팅에 적합하고, 유지보수 지점이 명확한 구조입니다.</p>
+      </div>
+      <div class="grid three">
+        <article class="card">
+          <div class="big-stat">HTML</div>
+          <h3>시맨틱 구조</h3>
+          <p>header, main, section, footer와 data-i18n 속성으로 화면 구조와 콘텐츠 연결을 분리합니다.</p>
+        </article>
+        <article class="card">
+          <div class="big-stat">CSS</div>
+          <h3>디자인 토큰</h3>
+          <p>색상, 간격, radius, 반응형 breakpoint를 커스텀 프로퍼티 기반으로 관리합니다.</p>
+        </article>
+        <article class="card">
+          <div class="big-stat">JS</div>
+          <h3>가벼운 인터랙션</h3>
+          <p>i18n, 테마, reveal, FAQ, CTA 이벤트, mailto 제출 로직을 바닐라 JS로 처리합니다.</p>
+        </article>
+      </div>
+      <div class="footer"><span>PRODOO.AI</span><span>07</span></div>
+    </section>
+
+    <section class="slide">
+      <p class="kicker">Design & Accessibility</p>
+      <h2>따뜻한 미니멀 디자인과 기본 접근성을 함께 고려했습니다.</h2>
+      <div class="grid four" style="margin-top: 44px;">
+        <article class="mini-card">
+          <h3>명확한 색상 체계</h3>
+          <p>중성 배경과 주황 계열 accent로 CTA를 분명히 보여줍니다.</p>
+        </article>
+        <article class="mini-card">
+          <h3>반응형 레이아웃</h3>
+          <p>모바일 우선, 768px/1024px 기준으로 카드 배열을 전환합니다.</p>
+        </article>
+        <article class="mini-card">
+          <h3>키보드 탐색</h3>
+          <p>버튼과 링크의 focus 상태, skip link, aria 상태값을 제공합니다.</p>
+        </article>
+        <article class="mini-card">
+          <h3>모션 감소 대응</h3>
+          <p>prefers-reduced-motion 환경에서는 애니메이션을 비활성화합니다.</p>
+        </article>
+      </div>
+      <div class="quote">디자인 목표는 “입문자도 부담 없이 읽고, 다음 행동을 바로 결정할 수 있는 페이지”입니다.</div>
+      <div class="footer"><span>PRODOO.AI</span><span>08</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="section-top">
+        <div>
+          <p class="kicker">Conversion</p>
+          <h2>방문자는 이해, 신뢰, 문의의 흐름을 따라 이동합니다.</h2>
+        </div>
+        <p class="lead">현재 문의는 서버 없이 메일 클라이언트를 여는 방식이므로 초기 검증에 적합합니다.</p>
+      </div>
+      <div class="flow">
+        <article class="flow-item">
+          <span class="number">A</span>
+          <h3>방문</h3>
+          <p>Hero에서 핵심 메시지와 서비스 방향을 확인합니다.</p>
+        </article>
+        <article class="flow-item">
+          <span class="number">B</span>
+          <h3>이해</h3>
+          <p>Value와 Process에서 어떤 방식으로 일하는지 파악합니다.</p>
+        </article>
+        <article class="flow-item">
+          <span class="number">C</span>
+          <h3>신뢰</h3>
+          <p>활용 사례, 후기, FAQ를 통해 실행 가능성을 확인합니다.</p>
+        </article>
+        <article class="flow-item">
+          <span class="number">D</span>
+          <h3>문의</h3>
+          <p>CAT 고객 문의 폼으로 상담 요청을 보냅니다.</p>
+        </article>
+      </div>
+      <div class="footer"><span>PRODOO.AI</span><span>09</span></div>
+    </section>
+
+    <section class="slide dark">
+      <p class="kicker">Roadmap</p>
+      <h2>다음 단계는 실제 운영 데이터를 연결해 더 강한 전환 페이지로 발전시키는 것입니다.</h2>
+      <div class="roadmap">
+        <article class="step">
+          <h3>1. 실제 사례 추가</h3>
+          <p>고객 로고, 성과 지표, 프로젝트 전후 비교를 반영합니다.</p>
+        </article>
+        <article class="step">
+          <h3>2. 폼 백엔드 연동</h3>
+          <p>메일 발송 API, 저장, 알림, 재시도 흐름을 추가합니다.</p>
+        </article>
+        <article class="step">
+          <h3>3. 분석 도구 연결</h3>
+          <p>CTA 클릭과 문의 전환을 추적해 개선 우선순위를 정합니다.</p>
+        </article>
+        <article class="step">
+          <h3>4. SEO 확장</h3>
+          <p>OG 이미지, favicon, 구조화 데이터, 언어별 공유 최적화를 진행합니다.</p>
+        </article>
+        <article class="step">
+          <h3>5. 서비스 상품화</h3>
+          <p>MVP 패키지, 자동화 패키지, 유지보수 옵션을 명확히 제시합니다.</p>
+        </article>
+      </div>
+      <p class="quote">PRODOO.AI는 아이디어가 실제 제품으로 움직이기까지의 거리를 줄입니다.</p>
+      <div class="footer"><span>PRODOO.AI</span><span>10</span></div>
+    </section>
+  </main>
+</body>
+</html>
